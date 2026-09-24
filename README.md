@@ -37,7 +37,8 @@ A small, rule-fixed crypto momentum experiment on the Coinbase **Momentum experi
 
 ## Secrets and variables (Settings, then Secrets and variables, then Actions)
 
-- Secrets: `COINBASE_API_KEY_NAME`, `COINBASE_API_PRIVATE_KEY`, `NTFY_TOPIC`
+- Secrets: `COINBASE_API_KEY_NAME`, `COINBASE_API_PRIVATE_KEY`
+- Optional secret: `NTFY_TOPIC` (phone alerts). Without it, check `state.json` and `log.csv` in the repo, and the Actions tab (a failed run shows red and GitHub emails you).
 - Variable (only when approved for live): `LIVE_TRADING` = `enabled`
 
 ## Operating

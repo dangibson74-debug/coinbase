@@ -39,6 +39,12 @@ def live_cfg():
     return cfg
 
 
+def dry_cfg():
+    cfg = copy.deepcopy(CFG)
+    cfg["dry_run"] = True
+    return cfg
+
+
 class FakeGateway:
     """In-memory stand-in for CoinbaseGateway. Market orders fill instantly with a 0.6% fee."""
 
@@ -133,7 +139,7 @@ class Scenario(unittest.TestCase):
         self.tmp.cleanup()
 
     def go(self, gw, cfg=None, state=None, now=NOW, live=False, force=False):
-        cfg = cfg or (live_cfg() if live else copy.deepcopy(CFG))
+        cfg = cfg or (live_cfg() if live else dry_cfg())
         state = state if state is not None else fresh_state()
         notifier = bot.Notifier("")
         code = bot.run(gw, cfg, state, now, self.log_path, notifier,
@@ -209,7 +215,7 @@ class RunTests(Scenario):
     def test_10_variable_without_config_stays_dry(self):
         gw = FakeGateway({"BTC": 8, "ETH": 1, "LINK": 1})
         state = fresh_state()
-        bot.run(gw, copy.deepcopy(CFG), state, NOW, self.log_path, bot.Notifier(""),
+        bot.run(gw, dry_cfg(), state, NOW, self.log_path, bot.Notifier(""),
                 live_var="enabled", sleep=lambda s: None)
         self.assertEqual(gw.orders, [])
 
