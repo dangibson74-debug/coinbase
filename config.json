@@ -1,5 +1,5 @@
 {
-  "dry_run": true,
+  "dry_run": false,
   "portfolio_uuid": "a1675951-fc70-4129-b2a5-dfa42d872653",
   "universe": ["BTC", "ETH", "LINK"],
   "quote_currency": "GBP",

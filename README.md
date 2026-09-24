@@ -31,13 +31,14 @@ A small, rule-fixed crypto momentum experiment on the Coinbase **Momentum experi
 | `config.json` | All rules as parameters |
 | `state.json` | Status, activation date, pause state, last check and switch dates |
 | `log.csv` | Every signal, decision, order, fill, fee and disposal (keep for CGT records) |
-| `tests/test_scenarios.py` | 21 mock-scenario tests: `python -m unittest discover -s tests -v` |
+| `tests/test_scenarios.py` | 24 mock-scenario tests: `python -m unittest discover -s tests -v` |
 | `.github/workflows/momentum.yml` | Daily schedule plus a manual Run workflow button |
 | `.github/workflows/tests.yml` | Re-runs the tests on every code change |
 
 ## Secrets and variables (Settings, then Secrets and variables, then Actions)
 
-- Secrets: `COINBASE_API_KEY_NAME`, `COINBASE_API_PRIVATE_KEY`, `NTFY_TOPIC`
+- Secrets: `COINBASE_API_KEY_NAME`, `COINBASE_API_PRIVATE_KEY`
+- Optional secret: `NTFY_TOPIC` (phone alerts). Without it, check `state.json` and `log.csv` in the repo, and the Actions tab (a failed run shows red and GitHub emails you).
 - Variable (only when approved for live): `LIVE_TRADING` = `enabled`
 
 ## Operating
