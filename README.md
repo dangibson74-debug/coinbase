@@ -31,7 +31,7 @@ A small, rule-fixed crypto momentum experiment on the Coinbase **Momentum experi
 | `config.json` | All rules as parameters |
 | `state.json` | Status, activation date, pause state, last check and switch dates |
 | `log.csv` | Every signal, decision, order, fill, fee and disposal (keep for CGT records) |
-| `tests/test_scenarios.py` | 21 mock-scenario tests: `python -m unittest discover -s tests -v` |
+| `tests/test_scenarios.py` | 24 mock-scenario tests: `python -m unittest discover -s tests -v` |
 | `.github/workflows/momentum.yml` | Daily schedule plus a manual Run workflow button |
 | `.github/workflows/tests.yml` | Re-runs the tests on every code change |
 

@@ -1,0 +1,55 @@
+name: momentum-bot
+
+on:
+  schedule:
+    # The check window is 20:00-23:59 Europe/London. These UTC times cover it in both
+    # GMT and BST; bot.py ignores runs outside the window and checks at most once a day.
+    - cron: "7 19,20,21,22,23 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: momentum-bot
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned dependencies
+        run: pip install --require-hashes --no-deps -r requirements.txt
+
+      - name: Mock tests (bot does not run if any fail)
+        run: python -m unittest discover -s tests -v
+
+      - name: Run bot
+        env:
+          COINBASE_API_KEY_NAME: ${{ secrets.COINBASE_API_KEY_NAME }}
+          COINBASE_API_PRIVATE_KEY: ${{ secrets.COINBASE_API_PRIVATE_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          LIVE_TRADING: ${{ vars.LIVE_TRADING }}
+          FORCE_RUN: ${{ github.event_name == 'workflow_dispatch' }}
+        run: python bot.py
+
+      - name: Commit state and log
+        if: always()
+        run: |
+          git config user.name "momentum-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state.json log.csv
+          if git diff --cached --quiet; then
+            echo "No state changes."
+          else
+            git commit -m "bot: run ${{ github.run_id }}"
+            git pull --rebase
+            git push
+          fi
