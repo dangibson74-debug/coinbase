@@ -470,8 +470,9 @@ def main():
     state_path = os.path.join(HERE, "state.json")
     state = load_json(state_path)
     notifier = Notifier(os.environ.get("NTFY_TOPIC"))
-    key_name = os.environ.get("COINBASE_API_KEY_NAME", "")
-    private_key = os.environ.get("COINBASE_API_PRIVATE_KEY", "")
+    key_name = os.environ.get("COINBASE_API_KEY_NAME", "").strip()
+    # Keys copied from Coinbase's JSON download contain literal "\n" instead of line breaks
+    private_key = os.environ.get("COINBASE_API_PRIVATE_KEY", "").strip().replace("\\n", "\n")
     if not key_name or not private_key:
         print("Missing COINBASE_API_KEY_NAME / COINBASE_API_PRIVATE_KEY secrets.")
         notifier.send("Momentum: setup error", "API key secrets are missing; nothing ran.", "high")
