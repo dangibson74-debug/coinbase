@@ -1,0 +1,19 @@
+{
+  "dry_run": true,
+  "portfolio_uuid": "a1675951-fc70-4129-b2a5-dfa42d872653",
+  "universe": ["BTC", "ETH", "LINK"],
+  "quote_currency": "GBP",
+  "lookback_days": 7,
+  "switch_margin_pp": "3",
+  "pause_threshold_gbp": "20.30",
+  "pause_days": 7,
+  "pause_triggers_once": true,
+  "end_threshold_gbp": "15.22",
+  "duration_days": 28,
+  "hard_cap_gbp": "70",
+  "max_value_mismatch_pct": "10",
+  "fee_buffer_pct": "0.6",
+  "dust_gbp": "0.50",
+  "check_window_london": [20, 24],
+  "order_fill_timeout_s": 90
+}

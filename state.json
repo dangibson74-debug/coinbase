@@ -1,0 +1,14 @@
+{
+  "activation_utc": null,
+  "benchmark": null,
+  "dry_run_checks": 0,
+  "halt_reason": null,
+  "last_check_london_date": null,
+  "last_holding": null,
+  "last_run_utc": null,
+  "last_switch_london_date": null,
+  "pause_acknowledged": false,
+  "pause_used": false,
+  "paused_until_utc": null,
+  "status": "active"
+}
