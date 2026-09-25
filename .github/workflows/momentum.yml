@@ -33,8 +33,8 @@ jobs:
 
       - name: Run bot
         env:
-          COINBASE_API_KEY_NAME: ${{ secrets.COINBASE_API_KEY_NAME }}
-          COINBASE_API_PRIVATE_KEY: ${{ secrets.COINBASE_API_PRIVATE_KEY }}
+          COINBASE_API_KEY_NAME: ${{ secrets.MOM_BOT_API_KEY_NAME }}
+          COINBASE_API_PRIVATE_KEY: ${{ secrets.MOM_BOT_API_PRIVATE_KEY }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           LIVE_TRADING: ${{ vars.LIVE_TRADING }}
           FORCE_RUN: ${{ github.event_name == 'workflow_dispatch' }}
