@@ -374,7 +374,7 @@ def daily_check(gw, cfg, state, now, today, log, notify, live, ctx, sleep):
         return
 
     # Pause threshold
-    pause_armed = not (cfg.get("pause_triggers_once", True) and state.get("pause_used"))
+    pause_armed = cfg.get("pause_enabled", True) and not (cfg.get("pause_triggers_once", True) and state.get("pause_used"))
     if value <= D(cfg["pause_threshold_gbp"]) and pause_armed:
         if live:
             liquidate(gw, cfg, pf, prices, log, ctx, sleep)
