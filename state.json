@@ -1,11 +1,14 @@
 {
-  "activation_utc": null,
-  "benchmark": null,
+  "activation_utc": "2026-09-25T07:17:18Z",
+  "benchmark": {
+    "btc_price": "63434",
+    "start_value": "27.7179675609696"
+  },
   "dry_run_checks": 0,
   "halt_reason": null,
   "last_check_london_date": null,
-  "last_holding": null,
-  "last_run_utc": null,
+  "last_holding": "LINK",
+  "last_run_utc": "2026-09-25T07:17:18Z",
   "last_switch_london_date": null,
   "pause_acknowledged": false,
   "pause_used": false,
