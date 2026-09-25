@@ -292,9 +292,11 @@ class RunTests(Scenario):
 
     def test_20_pause_liquidates_then_waits_for_approval_and_triggers_once(self):
         gw = FakeGateway({"BTC": -2, "ETH": 1, "LINK": 1}, holdings={"BTC": "20"}, gbp="0")
+        cfg = live_cfg()
+        cfg.update(pause_enabled=True, pause_threshold_gbp="20.30", end_threshold_gbp="15.22")
         state = fresh_state()
         state["activation_utc"] = "2026-09-25T19:30:00Z"
-        self.go(gw, state=state, live=True)
+        self.go(gw, cfg=cfg, state=state, live=True)
         self.assertEqual(state["status"], "paused")
         self.assertTrue(state["pause_used"])
         self.assertEqual([(s, p) for s, p, _ in gw.orders], [("SELL", "BTC-GBP")])
@@ -302,7 +304,7 @@ class RunTests(Scenario):
         # Seven days later, not yet approved: no trades
         n = len(gw.orders)
         later = NOW + timedelta(days=8)
-        _, state, notifier = self.go(gw, state=state, now=later, live=True)
+        _, state, notifier = self.go(gw, cfg=cfg, state=state, now=later, live=True)
         self.assertEqual(state["status"], "paused")
         self.assertEqual(len(gw.orders), n)
         self.assertIn("approval", notifier.sent[-1][0])
@@ -310,17 +312,27 @@ class RunTests(Scenario):
         # Approved: resumes, and the pause does not trigger a second time
         state["pause_acknowledged"] = True
         gw.prices_then = {a: p / D("1.08") for a, p in gw.prices.items()}  # all +8%
-        _, state, _ = self.go(gw, state=state, now=later + timedelta(days=1), live=True)
+        _, state, _ = self.go(gw, cfg=cfg, state=state, now=later + timedelta(days=1), live=True)
         self.assertEqual(state["status"], "active")
         self.assertEqual(gw.orders[-1][0:2], ("BUY", "BTC-GBP"))
 
     def test_21_end_threshold_liquidates_and_stops(self):
-        gw = FakeGateway({"BTC": 5, "ETH": 1, "LINK": 1}, holdings={"BTC": "15"}, gbp="0")
+        gw = FakeGateway({"BTC": 5, "ETH": 1, "LINK": 1}, holdings={"BTC": "7.50"}, gbp="0")
         state = fresh_state()
         state["activation_utc"] = "2026-09-25T19:30:00Z"
         self.go(gw, state=state, live=True)
         self.assertEqual(state["status"], "ended")
         self.assertEqual([(s, p) for s, p, _ in gw.orders], [("SELL", "BTC-GBP")])
+
+    def test_21b_no_pause_when_disabled(self):
+        gw = FakeGateway({"BTC": 5, "ETH": 1, "LINK": 1}, holdings={"BTC": "12"}, gbp="0")
+        cfg = live_cfg()
+        cfg.update(pause_enabled=False, end_threshold_gbp="8")
+        state = fresh_state()
+        state["activation_utc"] = "2026-09-25T19:30:00Z"
+        self.go(gw, cfg=cfg, state=state, live=True)
+        self.assertEqual(state["status"], "active")
+        self.assertEqual(gw.orders, [])
 
     def test_22_four_weeks_complete_keeps_position(self):
         gw = FakeGateway({"BTC": 1, "ETH": 9, "LINK": 1}, holdings={"BTC": "50"}, gbp="0")

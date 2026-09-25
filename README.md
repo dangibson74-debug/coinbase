@@ -9,8 +9,8 @@ A small, rule-fixed crypto momentum experiment on the Coinbase **Momentum experi
 - Daily check after 20:00 London. The signal is each coin's 7-day return (current price vs the hourly close 7 days earlier).
 - Hold the coin with the highest positive 7-day return. Hold GBP if all three are negative.
 - Switch only if the target beats the current holding by at least 3 percentage points (GBP = 0%). Max one switch per day.
-- Pause: at a value of GBP 20.30 or below, sell to GBP and pause for 7 days. Trading resumes only after approval (see below). The pause triggers once per experiment.
-- End: at a value of GBP 15.22 or below, sell to GBP and stop permanently.
+- Pause: switched off (`"pause_enabled": false`). When switched on, a value of GBP 20.30 or below sells to GBP and pauses for 7 days; trading resumes only after approval (see below), and the pause triggers once per experiment.
+- End: at a value of GBP 8 or below, sell to GBP and stop permanently.
 - Duration: 28 days from the first **live** check, then checks stop and the position is kept.
 
 ## Safety guards
@@ -31,7 +31,7 @@ A small, rule-fixed crypto momentum experiment on the Coinbase **Momentum experi
 | `config.json` | All rules as parameters |
 | `state.json` | Status, activation date, pause state, last check and switch dates |
 | `log.csv` | Every signal, decision, order, fill, fee and disposal (keep for CGT records) |
-| `tests/test_scenarios.py` | 24 mock-scenario tests: `python -m unittest discover -s tests -v` |
+| `tests/test_scenarios.py` | 25 mock-scenario tests: `python -m unittest discover -s tests -v` |
 | `.github/workflows/momentum.yml` | Daily schedule plus a manual Run workflow button |
 | `.github/workflows/tests.yml` | Re-runs the tests on every code change |
 
@@ -44,7 +44,7 @@ A small, rule-fixed crypto momentum experiment on the Coinbase **Momentum experi
 ## Operating
 
 - **Manual run:** Actions, then momentum-bot, then Run workflow. A manual run does not use up the day's scheduled check.
-- **Resume after a pause:** once the 7 days are up, edit `state.json` and set `"pause_acknowledged": true`.
+- **Resume after a pause** (only if the pause is switched on): once the 7 days are up, edit `state.json` and set `"pause_acknowledged": true`.
 - **Clear a halt** (`halted_error` / `halted_cap`): investigate first, then set `"status": "active"` and `"halt_reason": null` in `state.json`.
 - **Emergency stop:** set the `LIVE_TRADING` variable to anything other than `enabled`, or disable the workflow (Actions, then momentum-bot, then the ... menu, then Disable workflow). To revoke access entirely, delete the API key in Coinbase Developer Platform.
 
