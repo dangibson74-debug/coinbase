@@ -25,3 +25,8 @@ timestamp_utc,run_id,mode,event,asset,product_id,side,base_size,quote_gbp,price_
 2026-09-29T22:55:48Z,36642387442,LIVE,SIGNAL,LINK,LINK-GBP,,,,11.11188,,,7d_return_pct=14.0610 price_7d_ago=9.74205
 2026-09-29T22:55:48Z,36642387442,LIVE,PORTFOLIO,LINK,,,,30.41,,,,computed_gbp=30.41 holding=LINK btc_hold_benchmark_gbp=27.61
 2026-09-29T22:55:48Z,36642387442,LIVE,DECISION,LINK,,,,,,,,hold LINK: already the target
+2026-09-30T22:57:51Z,36788513495,LIVE,SIGNAL,BTC,BTC-GBP,,,,63099.99,,,7d_return_pct=-1.1737 price_7d_ago=63849.39
+2026-09-30T22:57:51Z,36788513495,LIVE,SIGNAL,ETH,ETH-GBP,,,,2027.08,,,7d_return_pct=-0.1665 price_7d_ago=2030.46
+2026-09-30T22:57:51Z,36788513495,LIVE,SIGNAL,LINK,LINK-GBP,,,,10.83608,,,7d_return_pct=16.2883 price_7d_ago=9.31829
+2026-09-30T22:57:51Z,36788513495,LIVE,PORTFOLIO,LINK,,,,29.67,,,,computed_gbp=29.66 holding=LINK btc_hold_benchmark_gbp=27.57
+2026-09-30T22:57:51Z,36788513495,LIVE,DECISION,LINK,,,,,,,,hold LINK: already the target
