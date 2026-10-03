@@ -35,3 +35,8 @@ timestamp_utc,run_id,mode,event,asset,product_id,side,base_size,quote_gbp,price_
 2026-10-02T22:56:17Z,37075092450,LIVE,SIGNAL,LINK,LINK-GBP,,,,10.37305,,,7d_return_pct=-1.1727 price_7d_ago=10.49614
 2026-10-02T22:56:17Z,37075092450,LIVE,PORTFOLIO,LINK,,,,28.41,,,,computed_gbp=28.39 holding=LINK btc_hold_benchmark_gbp=27.91
 2026-10-02T22:56:17Z,37075092450,LIVE,DECISION,LINK,,,,,,,,hold LINK: BTC leads by only 1.79pp (< 3pp)
+2026-10-03T22:06:24Z,37157293301,LIVE,SIGNAL,BTC,BTC-GBP,,,,64091.4,,,7d_return_pct=0.6694 price_7d_ago=63665.25
+2026-10-03T22:06:24Z,37157293301,LIVE,SIGNAL,ETH,ETH-GBP,,,,2032.22,,,7d_return_pct=0.1399 price_7d_ago=2029.38
+2026-10-03T22:06:24Z,37157293301,LIVE,SIGNAL,LINK,LINK-GBP,,,,10.6033,,,7d_return_pct=-0.1947 price_7d_ago=10.62399
+2026-10-03T22:06:24Z,37157293301,LIVE,PORTFOLIO,LINK,,,,29.01,,,,computed_gbp=29.02 holding=LINK btc_hold_benchmark_gbp=28.01
+2026-10-03T22:06:24Z,37157293301,LIVE,DECISION,LINK,,,,,,,,hold LINK: BTC leads by only 0.86pp (< 3pp)
