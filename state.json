@@ -5,13 +5,13 @@
     "start_value": "27.7179675609696"
   },
   "dry_run_checks": 0,
-  "halt_reason": null,
-  "last_check_london_date": "2026-10-04",
+  "halt_reason": "HaltExperiment: GBP 0E+3 is below the minimum order for BTC-GBP",
+  "last_check_london_date": "2026-10-06",
   "last_holding": "LINK",
-  "last_run_utc": "2026-10-06T00:45:18Z",
+  "last_run_utc": "2026-10-06T22:58:23Z",
   "last_switch_london_date": null,
   "pause_acknowledged": false,
   "pause_used": false,
   "paused_until_utc": null,
-  "status": "active"
+  "status": "halted_error"
 }
